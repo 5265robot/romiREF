@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.geometry.Translation2d;
 import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
+import frc.robot.Constants.TrajectoryConstants;
 import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.AutonomousDistance;
 import frc.robot.commands.AutonomousTime;
@@ -101,11 +102,12 @@ public class RobotContainer {
     Trajectory exampleTrajectory = TrajectoryGenerator.generateTrajectory(
         // Start at the origin facing the +X direction
         new Pose2d(0, 0, new Rotation2d(0)),
-        List.of(
+        TrajectoryConstants.kExample,
+        /*List.of(
             new Translation2d(0.5, 0.25),
             new Translation2d(1.0, -0.25),
             new Translation2d(1.5, 0)
-        ),
+        ),*/
         new Pose2d(0.0, 0, new Rotation2d(Math.PI)),
         config);
 

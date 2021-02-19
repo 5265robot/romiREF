@@ -4,6 +4,9 @@
 
 package frc.robot;
 
+import java.util.List;
+
+import edu.wpi.first.wpilibj.geometry.Translation2d;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
 
 /**
@@ -31,7 +34,7 @@ public final class Constants {
             new DifferentialDriveKinematics(kTrackwidthMeters);
       }
     
-      public static final class AutoConstants {
+    public static final class AutoConstants {
         public static final double kMaxSpeedMetersPerSecond = 0.8;
         public static final double kMaxAccelerationMetersPerSecondSquared = 0.8;
     
@@ -39,4 +42,13 @@ public final class Constants {
         public static final double kRamseteB = 2;
         public static final double kRamseteZeta = 0.7;
       }
+
+    public static final class TrajectoryConstants {
+        public static final List<Translation2d> kExample =
+          List.of(
+            new Translation2d(0.5, 0.25),
+            new Translation2d(1.0, -0.25),
+            new Translation2d(1.5, 0)
+          );
+    }
 }
