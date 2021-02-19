@@ -9,6 +9,8 @@ import edu.wpi.first.hal.SimDevice.Direction;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.hal.SimDouble;
 
+// needs to implement the Gyro class
+// for this example to work
 public class RomiGyro implements Gyro{
   private SimDouble m_simRateX;
   private SimDouble m_simRateY;
@@ -21,6 +23,8 @@ public class RomiGyro implements Gyro{
   private double m_angleYOffset;
   private double m_angleZOffset;
 
+  // make the instance available to the whole class,
+  // not just the create method
   private SimDevice m_gyroSimDevice;
 
   /** Create a new RomiGyro. */
@@ -125,6 +129,8 @@ public class RomiGyro implements Gyro{
     }
   }
 
+  // these are required by the Gyro class
+  // and need to be specified in this class
   @Override
   public void close() throws Exception {
     if (m_gyroSimDevice != null) {
