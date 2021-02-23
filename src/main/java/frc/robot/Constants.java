@@ -9,6 +9,7 @@ import java.util.List;
 import edu.wpi.first.wpilibj.geometry.Translation2d;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
 
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide
  * numerical or boolean constants. This class should not be used for any other
@@ -21,6 +22,10 @@ import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
  */
 public final class Constants {
 
+    public static final class Weirdness {
+      public static final double leftTweak = 1.0;
+      public static final double rightTweak = 1.0;
+    }
     // copied from chief delphi example
     public static final class DriveConstants {
         public static final double ksVolts = 0.929;
@@ -44,11 +49,36 @@ public final class Constants {
       }
 
     public static final class TrajectoryConstants {
+        private static final double kWheelDiameterInch = 2.75591;
+        private static final double kWheelDiameterMeter = 0.070;
+        // pick either meters or inches to match trajectory values
+        public static final double kWheelDiameter = kWheelDiameterMeter;
+        // public static final double kWheelDiameter = kWheelDiameterInch;
+        // for one meter example 
         public static final List<Translation2d> kExample =
           List.of(
-            new Translation2d(0.5, 0.25),
-            new Translation2d(1.0, -0.25),
-            new Translation2d(1.5, 0)
+            new Translation2d(0.35, 0.0),
+            new Translation2d(0.35, 0.45),
+            new Translation2d(-0.3, 0.1)
+          );
+        // for inch example
+        public static final List<Translation2d> kMondrian =
+          List.of(
+            new Translation2d(),
+            new Translation2d(),
+            new Translation2d(),
+            new Translation2d(),
+            new Translation2d(),
+            new Translation2d()
           );
     }
+
+    /*public static final class AutoDistConstants {
+      public static final List<CommandBase> distance01 =
+        List.of(
+          new DriveDistance(-0.5, 10,x),
+          new TurnDegrees(-0.5, 180, drivetrain),
+          new DriveDistance(-0.5, 10, drivetrain),
+          new TurnDegrees(0.5, 180, drivetrain));
+    }*/
 }

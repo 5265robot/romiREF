@@ -4,7 +4,6 @@
 
 package frc.robot;
 
-import java.util.List;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
@@ -13,7 +12,6 @@ import edu.wpi.first.wpilibj.controller.RamseteController;
 import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
-import edu.wpi.first.wpilibj.geometry.Translation2d;
 import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.TrajectoryConstants;
@@ -103,12 +101,7 @@ public class RobotContainer {
         // Start at the origin facing the +X direction
         new Pose2d(0, 0, new Rotation2d(0)),
         TrajectoryConstants.kExample,
-        /*List.of(
-            new Translation2d(0.5, 0.25),
-            new Translation2d(1.0, -0.25),
-            new Translation2d(1.5, 0)
-        ),*/
-        new Pose2d(0.0, 0, new Rotation2d(Math.PI)),
+        new Pose2d(0.0, 0, new Rotation2d(0)), //(Math.PI)),
         config);
 
     RamseteCommand ramseteCommand = new RamseteCommand(
@@ -178,6 +171,6 @@ public class RobotContainer {
   public Command getArcadeDriveCommand() {
     return new ArcadeDrive(m_drivetrain, 
         () -> -m_controller.getRawAxis(1), 
-        () -> m_controller.getRawAxis(4));
+        () -> m_controller.getRawAxis(0));
   }
 }

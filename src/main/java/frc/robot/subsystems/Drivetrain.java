@@ -13,14 +13,13 @@ import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Constants.TrajectoryConstants;
 import frc.robot.sensors.RomiGyro;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Drivetrain extends SubsystemBase {
   private static final double kCountsPerRevolution = 1440.0;
-  private static final double kWheelDiameterInch = 2.75591; // 70 mm
-  private static final double kWheelDiameterMeter = kWheelDiameterInch*2.54/1000;
-
+  
   // The Romi has the left and right motors set to
   // PWM channels 0 and 1 respectively
   private final Spark m_leftMotor = new Spark(0);
@@ -49,12 +48,9 @@ public class Drivetrain extends SubsystemBase {
 
   /** Creates a new Drivetrain. */
   public Drivetrain() {
-    // Use inches as unit for encoder distances
-    // m_leftEncoder.setDistancePerPulse((Math.PI * kWheelDiameterInch) / kCountsPerRevolution);
-    // m_rightEncoder.setDistancePerPulse((Math.PI * kWheelDiameterInch) / kCountsPerRevolution);
-    // Use meters as unit for encoder distances
-    m_leftEncoder.setDistancePerPulse((Math.PI * kWheelDiameterMeter) / kCountsPerRevolution);
-    m_rightEncoder.setDistancePerPulse((Math.PI * kWheelDiameterMeter) / kCountsPerRevolution);
+    // wheel diameter units should match trajectory units
+    m_leftEncoder.setDistancePerPulse((Math.PI * TrajectoryConstants.kWheelDiameter) / kCountsPerRevolution);
+    m_rightEncoder.setDistancePerPulse((Math.PI * TrajectoryConstants.kWheelDiameter) / kCountsPerRevolution);
     //
     resetEncoders();
 
@@ -63,6 +59,7 @@ public class Drivetrain extends SubsystemBase {
   }
 
   public void arcadeDrive(double xaxisSpeed, double zaxisRotate) {
+    // m_diffDrive.curvatureDrive(xSpeed, zRotation, isQuickTurn);
     m_diffDrive.arcadeDrive(xaxisSpeed, zaxisRotate);
   }
 
@@ -73,8 +70,8 @@ public class Drivetrain extends SubsystemBase {
    * @param rightVolts the commanded right output
    */
   public void tankDriveVolts(double leftVolts, double rightVolts) {
-    m_leftMotor.setVoltage(leftVolts);
-    m_rightMotor.setVoltage(-rightVolts); // We invert this to maintain +ve = forward
+    m_leftMotor.setVoltage(-leftVolts);
+    m_rightMotor.setVoltage(rightVolts); // We invert this to maintain +ve = forward
     m_diffDrive.feed();
   }
 
