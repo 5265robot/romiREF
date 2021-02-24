@@ -8,13 +8,18 @@ import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.geometry.Pose2d;
+import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
+import edu.wpi.first.wpilibj.kinematics.DifferentialDriveWheelSpeeds;
+import edu.wpi.first.wpilibj.smartdashboard.Field2d;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Constants.TrajectoryConstants;
 import frc.robot.sensors.RomiGyro;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Drivetrain extends SubsystemBase {
   private static final double kCountsPerRevolution = 1440.0;
-  private static final double kWheelDiameterInch = 2.75591; // 70 mm
-
+  
   // The Romi has the left and right motors set to
   // PWM channels 0 and 1 respectively
   private final Spark m_leftMotor = new Spark(0);
@@ -34,16 +39,40 @@ public class Drivetrain extends SubsystemBase {
   // Set up the BuiltInAccelerometer
   private final BuiltInAccelerometer m_accelerometer = new BuiltInAccelerometer();
 
+  // added odometry and field diagram
+  // to match chief delphi example trajectory
+  // Set up odometry class
+  private final DifferentialDriveOdometry m_odometry;
+  // Set up field diagram
+  private final Field2d m_field2D = new Field2d();
+
   /** Creates a new Drivetrain. */
   public Drivetrain() {
-    // Use inches as unit for encoder distances
-    m_leftEncoder.setDistancePerPulse((Math.PI * kWheelDiameterInch) / kCountsPerRevolution);
-    m_rightEncoder.setDistancePerPulse((Math.PI * kWheelDiameterInch) / kCountsPerRevolution);
+    // wheel diameter units should match trajectory units
+    m_leftEncoder.setDistancePerPulse((Math.PI * TrajectoryConstants.kWheelDiameter) / kCountsPerRevolution);
+    m_rightEncoder.setDistancePerPulse((Math.PI * TrajectoryConstants.kWheelDiameter) / kCountsPerRevolution);
+    //
     resetEncoders();
+
+    m_odometry = new DifferentialDriveOdometry(m_gyro.getRotation2d());
+    SmartDashboard.putData("field",m_field2D);
   }
 
   public void arcadeDrive(double xaxisSpeed, double zaxisRotate) {
+    // m_diffDrive.curvatureDrive(xSpeed, zRotation, isQuickTurn);
     m_diffDrive.arcadeDrive(xaxisSpeed, zaxisRotate);
+  }
+
+  // added to match chief delphi example
+  /**
+   * Controls the left and right sides of the drive directly with voltages.
+   * @param leftVolts the commanded left output
+   * @param rightVolts the commanded right output
+   */
+  public void tankDriveVolts(double leftVolts, double rightVolts) {
+    m_leftMotor.setVoltage(-leftVolts);
+    m_rightMotor.setVoltage(rightVolts); // We invert this to maintain +ve = forward
+    m_diffDrive.feed();
   }
 
   public void resetEncoders() {
@@ -62,14 +91,24 @@ public class Drivetrain extends SubsystemBase {
   public double getLeftDistanceInch() {
     return m_leftEncoder.getDistance();
   }
-
   public double getRightDistanceInch() {
     return m_rightEncoder.getDistance();
   }
-
   public double getAverageDistanceInch() {
     return (getLeftDistanceInch() + getRightDistanceInch()) / 2.0;
   }
+
+  // added to match chief delphi example
+  public double getLeftDistanceMeter() {
+    return m_leftEncoder.getDistance();
+  }
+  public double getRightDistanceMeter() {
+    return m_rightEncoder.getDistance();
+  }
+  public double getAverageDistanceMeter() {
+    return (getLeftDistanceMeter() + getRightDistanceMeter()) / 2.0;
+  }
+
 
   /**
    * The acceleration in the X-axis.
@@ -133,5 +172,60 @@ public class Drivetrain extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    // update odometry
+    m_odometry.update(m_gyro.getRotation2d(), m_leftEncoder.getDistance(), m_rightEncoder.getDistance());
+    // update field object
+    m_field2D.setRobotPose(getPose());
+  }
+
+  // next 7 methods added to match chief delphi example
+  /**
+   * Returns the currently estimated pose of the robot.
+   * @return The pose
+   */
+  public Pose2d getPose() {
+    return m_odometry.getPoseMeters();
+  }
+  /**
+   * Returns the current wheel speeds of the robot.
+   * @return The current wheel speeds
+   */
+  public DifferentialDriveWheelSpeeds getWheelSpeeds() {
+    return new DifferentialDriveWheelSpeeds(m_leftEncoder.getRate(), m_rightEncoder.getRate());
+  }
+  /**
+   * Resets the odometry to the specified pose
+   * @param pose The pose to which to set the odometry
+   */
+  public void resetOdometry(Pose2d pose) {
+    resetEncoders();
+    m_odometry.resetPosition(pose, m_gyro.getRotation2d());
+  }
+  /**
+   * Sets the max output of the drive. Useful for scaling the drive to drive more slowly
+   * @param maxOutput The maximum output to which the drive will be constrained
+   */
+  public void setMaxOutput(double maxOutput) {
+    m_diffDrive.setMaxOutput(maxOutput);
+  }
+  /**
+   * Zeroes the heading of the robot
+   */
+  public void zeroHeading() {
+    m_gyro.reset();
+  }
+  /**
+   * Returns the heading of the robot
+   * @return The robot's heading in degrees, from -180 to 180
+   */
+  public double getHeading() {
+    return m_gyro.getRotation2d().getDegrees();
+  }
+  /**
+   * Returns the turn rate of the robot
+   * @return The turn rate of the robot, in degrees per second
+   */
+  public double getTurnRate() {
+    return -m_gyro.getRate();
   }
 }
