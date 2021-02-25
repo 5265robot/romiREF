@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
+import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
@@ -43,6 +44,7 @@ public class Drivetrain extends SubsystemBase {
   // to match chief delphi example trajectory
   // Set up odometry class
   private final DifferentialDriveOdometry m_odometry;
+
   // Set up field diagram
   private final Field2d m_field2D = new Field2d();
 
@@ -55,7 +57,7 @@ public class Drivetrain extends SubsystemBase {
     resetEncoders();
 
     m_odometry = new DifferentialDriveOdometry(m_gyro.getRotation2d());
-    SmartDashboard.putData("field",m_field2D);
+    SmartDashboard.putData("field", m_field2D);
   }
 
   public void arcadeDrive(double xaxisSpeed, double zaxisRotate) {
@@ -66,7 +68,8 @@ public class Drivetrain extends SubsystemBase {
   // added to match chief delphi example
   /**
    * Controls the left and right sides of the drive directly with voltages.
-   * @param leftVolts the commanded left output
+   * 
+   * @param leftVolts  the commanded left output
    * @param rightVolts the commanded right output
    */
   public void tankDriveVolts(double leftVolts, double rightVolts) {
@@ -91,9 +94,11 @@ public class Drivetrain extends SubsystemBase {
   public double getLeftDistanceInch() {
     return m_leftEncoder.getDistance();
   }
+
   public double getRightDistanceInch() {
     return m_rightEncoder.getDistance();
   }
+
   public double getAverageDistanceInch() {
     return (getLeftDistanceInch() + getRightDistanceInch()) / 2.0;
   }
@@ -102,13 +107,14 @@ public class Drivetrain extends SubsystemBase {
   public double getLeftDistanceMeter() {
     return m_leftEncoder.getDistance();
   }
+
   public double getRightDistanceMeter() {
     return m_rightEncoder.getDistance();
   }
+
   public double getAverageDistanceMeter() {
     return (getLeftDistanceMeter() + getRightDistanceMeter()) / 2.0;
   }
-
 
   /**
    * The acceleration in the X-axis.
