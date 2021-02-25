@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.geometry.Translation2d;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
+import edu.wpi.first.wpilibj.util.Units;
 
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide
@@ -68,17 +69,38 @@ public final class Constants {
         // for inch example
         public static final List<Translation2d> interiorMondrianPoints =
           List.of(
-            new Translation2d(),
-            new Translation2d(),
-            new Translation2d(),
-            new Translation2d(),
-            new Translation2d(),
-            new Translation2d()
+            // inital pose is Units.inchesToMeters(-13.5),Units.inchesToMeters(4.5)
+            // 9 inches down
+            new Translation2d(Units.inchesToMeters(-13.5),Units.inchesToMeters(-4.5)),
+            // begin the curve
+            new Translation2d(Units.inchesToMeters(-11.0),Units.inchesToMeters(-11.0)),
+            // enter the yellow
+            new Translation2d(Units.inchesToMeters(-4.5),Units.inchesToMeters(-13.5)),
+            // 9 inches right to be 90 degrees from initial pose
+            new Translation2d(Units.inchesToMeters(+4.5),Units.inchesToMeters(-13.5)),
+            // align for center traverse
+            new Translation2d(Units.inchesToMeters(+4.5),Units.inchesToMeters(-9.0)),
+            // center
+            new Translation2d(0,0),
+            // everything is now a reflection of the original route
+            // in reverse order (which means the sign changes, not the value)
+            // exit the center
+            new Translation2d(Units.inchesToMeters(-4.5),Units.inchesToMeters(+9.0)),
+            // traverse the blue to be a reflection of the 90 degree position
+            new Translation2d(Units.inchesToMeters(-4.5),Units.inchesToMeters(+13.5)),
+            // 9 inches right
+            new Translation2d(Units.inchesToMeters(+4.5),Units.inchesToMeters(+13.5)),
+            // begin the curve
+            new Translation2d(Units.inchesToMeters(+11.0),Units.inchesToMeters(11.0)),
+            // align for entering the red
+            new Translation2d(Units.inchesToMeters(+13.5),Units.inchesToMeters(+4.5))
+            // 9 inches down
+            // ending pose is Units.inchesToMeters(+13.5),Units.inchesToMeters(-4.5)
           );
         public static final Pose2d startPose = 
-          new Pose2d(0, 0, new Rotation2d(0));
+          new Pose2d(Units.inchesToMeters(-13.5), Units.inchesToMeters(4.5), new Rotation2d(Math.PI));
         public static final Pose2d endPose = 
-          new Pose2d(-0.5, 0.1, new Rotation2d(0));  //(Math.PI)),
+          new Pose2d(Units.inchesToMeters(+13.5), Units.inchesToMeters(-4.5), new Rotation2d(Math.PI));
     }
 
     /*public static final class AutoDistConstants {

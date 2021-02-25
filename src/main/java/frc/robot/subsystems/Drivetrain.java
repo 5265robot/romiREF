@@ -55,7 +55,8 @@ public class Drivetrain extends SubsystemBase {
     //
     resetEncoders();
 
-    m_odometry = new DifferentialDriveOdometry(m_gyro.getRotation2d());
+    // added optional pose to place robot not in center of odometry
+    m_odometry = new DifferentialDriveOdometry(m_gyro.getRotation2d(),TrajectoryConstants.startPose);
     SmartDashboard.putData("field", m_field2D);
   }
 
