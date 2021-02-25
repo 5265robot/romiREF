@@ -45,8 +45,8 @@ public final class Constants {
       }
     
     public static final class AutoConstants {
-        public static final double kMaxSpeedMetersPerSecond = 0.8;
-        public static final double kMaxAccelerationMetersPerSecondSquared = 0.8;
+        public static final double kMaxSpeedMetersPerSecond = 0.8; // was 0.8
+        public static final double kMaxAccelerationMetersPerSecondSquared = 0.8; // was 0.8
     
         // Reasonable baseline values for a RAMSETE follower in units of meters and seconds
         public static final double kRamseteB = 2;
@@ -62,9 +62,9 @@ public final class Constants {
         // for one meter example 
         public static final List<Translation2d> interiorPoints =
           List.of(
-            new Translation2d(0.35, 0.0),
-            new Translation2d(0.35, 0.45),
-            new Translation2d(-0.3, 0.1)
+            new Translation2d(Units.inchesToMeters(+16.0), Units.inchesToMeters(+10.0)),
+            // new Translation2d(0.35, 0.45),
+            new Translation2d(Units.inchesToMeters(+22.0), Units.inchesToMeters(+10.0))
           );
         // for inch example
         public static final List<Translation2d> interiorMondrianPoints =
@@ -97,10 +97,14 @@ public final class Constants {
             // 9 inches down
             // ending pose is Units.inchesToMeters(+13.5),Units.inchesToMeters(-4.5)
           );
-        public static final Pose2d startPose = 
-          new Pose2d(Units.inchesToMeters(-13.5), Units.inchesToMeters(4.5), new Rotation2d(Math.PI));
+        public static final Pose2d startPose =
+          // new Pose2d(Units.inchesToMeters(-6.0),Units.inchesToMeters(-6.0), new Rotation2d(0));
+          new Pose2d(Units.inchesToMeters(+10.0),Units.inchesToMeters(+10.0),new Rotation2d(0)); 
+          // new Pose2d(Units.inchesToMeters(-13.5), Units.inchesToMeters(4.5), new Rotation2d(0));
         public static final Pose2d endPose = 
-          new Pose2d(Units.inchesToMeters(+13.5), Units.inchesToMeters(-4.5), new Rotation2d(Math.PI));
+          // new Pose2d(Units.inchesToMeters(-6.0),Units.inchesToMeters(+6.0), new Rotation2d(0));
+          new Pose2d(Units.inchesToMeters(+23.0),Units.inchesToMeters(+10.0),new Rotation2d(Units.degreesToRadians(180))); 
+          // new Pose2d(Units.inchesToMeters(+13.5), Units.inchesToMeters(-4.5), new Rotation2d(0));
     }
 
     /*public static final class AutoDistConstants {

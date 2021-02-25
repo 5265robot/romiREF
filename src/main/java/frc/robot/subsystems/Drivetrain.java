@@ -56,7 +56,9 @@ public class Drivetrain extends SubsystemBase {
     resetEncoders();
 
     // added optional pose to place robot not in center of odometry
-    m_odometry = new DifferentialDriveOdometry(m_gyro.getRotation2d(),TrajectoryConstants.startPose);
+    // m_odometry = new DifferentialDriveOdometry(m_gyro.getRotation2d(),TrajectoryConstants.startPose);
+    // original without optional start pose
+    m_odometry = new DifferentialDriveOdometry(m_gyro.getRotation2d());
     SmartDashboard.putData("field", m_field2D);
   }
 
@@ -73,8 +75,8 @@ public class Drivetrain extends SubsystemBase {
    * @param rightVolts the commanded right output
    */
   public void tankDriveVolts(double leftVolts, double rightVolts) {
-    m_leftMotor.setVoltage(-leftVolts);
-    m_rightMotor.setVoltage(rightVolts); // We invert this to maintain +ve = forward
+    m_leftMotor.setVoltage(leftVolts);
+    m_rightMotor.setVoltage(-rightVolts); // We invert this to maintain +ve = forward
     m_diffDrive.feed();
   }
 
