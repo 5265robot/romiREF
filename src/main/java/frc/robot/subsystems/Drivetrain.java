@@ -43,6 +43,7 @@ public class Drivetrain extends SubsystemBase {
   // to match chief delphi example trajectory
   // Set up odometry class
   private final DifferentialDriveOdometry m_odometry;
+  public Pose2d m_pose;
 
   // Set up field diagram
   private final Field2d m_field2D = new Field2d();
@@ -56,7 +57,8 @@ public class Drivetrain extends SubsystemBase {
     resetEncoders();
 
     // added optional pose to place robot not in center of odometry
-    // m_odometry = new DifferentialDriveOdometry(m_gyro.getRotation2d(),TrajectoryConstants.startPose);
+    // m_odometry = new
+    // DifferentialDriveOdometry(m_gyro.getRotation2d(),TrajectoryConstants.startPose);
     // original without optional start pose
     m_odometry = new DifferentialDriveOdometry(m_gyro.getRotation2d());
     SmartDashboard.putData("field", m_field2D);
@@ -181,9 +183,11 @@ public class Drivetrain extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     // update odometry
-    m_odometry.update(m_gyro.getRotation2d(), m_leftEncoder.getDistance(), m_rightEncoder.getDistance());
+    m_pose = m_odometry.update(m_gyro.getRotation2d(), m_leftEncoder.getDistance(), m_rightEncoder.getDistance());
     // update field object
-    m_field2D.setRobotPose(getPose());
+    // m_field2D.setRobotPose(getPose());
+    // use the pose we just made
+    m_field2D.setRobotPose(m_pose);
   }
 
   // next 7 methods added to match chief delphi example

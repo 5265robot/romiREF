@@ -98,7 +98,7 @@ public class RobotContainer {
     Trajectory exampleTrajectory = TrajectoryGenerator.generateTrajectory(
         // Start at the origin facing the +X direction
         TrajectoryConstants.startPose,
-        TrajectoryConstants.interiorPoints,
+        TrajectoryConstants.interiorWavePoints,
         TrajectoryConstants.endPose, 
         config);
 
