@@ -79,11 +79,11 @@ public final class Constants {
             // 9 inches down
             // new Translation2d(Units.inchesToMeters(-12.5),Units.inchesToMeters(-4.5)),
             // begin the curve
-            new Translation2d(Units.inchesToMeters(-11.0),Units.inchesToMeters(-10.8)),
+            new Translation2d(Units.inchesToMeters(-11.4),Units.inchesToMeters(-12.8)),
             // enter the yellow
             // new Translation2d(Units.inchesToMeters(-4.5),Units.inchesToMeters(-13.0)),
             // 9 inches right to be 90 degrees from initial pose
-            new Translation2d(Units.inchesToMeters(+5.0),Units.inchesToMeters(-10.8)),
+            new Translation2d(Units.inchesToMeters(+4.8),Units.inchesToMeters(-13.0)),
             // align for center traverse
             // new Translation2d(Units.inchesToMeters(+4.5),Units.inchesToMeters(-10.0)),
 
@@ -95,11 +95,11 @@ public final class Constants {
             // exit the center
             // new Translation2d(Units.inchesToMeters(-2.0),Units.inchesToMeters(+9.0)),
             // traverse the blue to be a reflection of the 90 degree position
-            new Translation2d(Units.inchesToMeters(-5.0),Units.inchesToMeters(+10.8)),
+            new Translation2d(Units.inchesToMeters(-1.8),Units.inchesToMeters(+9.8)),
             // 9 inches right
             // new Translation2d(Units.inchesToMeters(+4.5),Units.inchesToMeters(+13.0)),
             // begin the curve
-            new Translation2d(Units.inchesToMeters(+11.0),Units.inchesToMeters(+10.8))
+            new Translation2d(Units.inchesToMeters(+11.0),Units.inchesToMeters(+10.6))
             // align for entering the red
             // new Translation2d(Units.inchesToMeters(+14.5),Units.inchesToMeters(+4.5))
             // 9 inches down
@@ -118,7 +118,7 @@ public final class Constants {
           //wave
           // new Pose2d(Units.inchesToMeters(+6.0),Units.inchesToMeters(+13.0),new Rotation2d(Units.degreesToRadians(90)));
           // mondrian 
-          new Pose2d(Units.inchesToMeters(+13.5), Units.inchesToMeters(-3.0), new Rotation2d(Units.degreesToRadians(-90)));
+          new Pose2d(Units.inchesToMeters(+11.0), Units.inchesToMeters(-3.1), new Rotation2d(Units.degreesToRadians(-90)));
     }
 
 }
