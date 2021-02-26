@@ -59,14 +59,19 @@ public final class Constants {
         public static final double kWheelDiameter = kWheelDiameterMeter;
         // private static final double kWheelDiameterInch = 2.75591;
         // public static final double kWheelDiameter = kWheelDiameterInch;
-        // for one meter example 
-        public static final List<Translation2d> interiorPoints =
+        // STRAIGHT line test 
+        public static final List<Translation2d> interiorStraightPoints =
           List.of(
-            new Translation2d(Units.inchesToMeters(+16.0), Units.inchesToMeters(+10.0)),
-            // new Translation2d(0.35, 0.45),
+            new Translation2d(Units.inchesToMeters(+16.0), Units.inchesToMeters(+16.0)),
             new Translation2d(Units.inchesToMeters(+22.0), Units.inchesToMeters(+10.0))
           );
-        // for inch example
+        // WAVE in the middle
+        public static final List<Translation2d> interiorWavePoints =
+          List.of(
+            new Translation2d(Units.inchesToMeters(+16.0), Units.inchesToMeters(+16.0)),
+            new Translation2d(Units.inchesToMeters(+22.0), Units.inchesToMeters(+10.0))
+          );
+        // MONDRIAN MADNESS
         public static final List<Translation2d> interiorMondrianPoints =
           List.of(
             // inital pose is Units.inchesToMeters(-13.5),Units.inchesToMeters(4.5)
@@ -98,21 +103,19 @@ public final class Constants {
             // ending pose is Units.inchesToMeters(+13.5),Units.inchesToMeters(-4.5)
           );
         public static final Pose2d startPose =
+          // straight
           // new Pose2d(Units.inchesToMeters(-6.0),Units.inchesToMeters(-6.0), new Rotation2d(0));
-          new Pose2d(Units.inchesToMeters(+10.0),Units.inchesToMeters(+10.0),new Rotation2d(0)); 
+          // wave
+          new Pose2d(Units.inchesToMeters(+10.0),Units.inchesToMeters(+10.0),new Rotation2d(-Math.PI / 2)); 
+          // mondrian
           // new Pose2d(Units.inchesToMeters(-13.5), Units.inchesToMeters(4.5), new Rotation2d(0));
         public static final Pose2d endPose = 
+          // straight
           // new Pose2d(Units.inchesToMeters(-6.0),Units.inchesToMeters(+6.0), new Rotation2d(0));
-          new Pose2d(Units.inchesToMeters(+23.0),Units.inchesToMeters(+10.0),new Rotation2d(Units.degreesToRadians(180))); 
+          //wave
+          new Pose2d(Units.inchesToMeters(+23.0),Units.inchesToMeters(+10.0),new Rotation2d(-Math.PI / 2));
+          // mondrian 
           // new Pose2d(Units.inchesToMeters(+13.5), Units.inchesToMeters(-4.5), new Rotation2d(0));
     }
 
-    /*public static final class AutoDistConstants {
-      public static final List<CommandBase> distance01 =
-        List.of(
-          new DriveDistance(-0.5, 10, drivetrain),
-          new TurnDegrees(-0.5, 180, drivetrain),
-          new DriveDistance(-0.5, 10, drivetrain),
-          new TurnDegrees(0.5, 180, drivetrain));
-    }*/
 }
