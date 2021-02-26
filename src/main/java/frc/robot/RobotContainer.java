@@ -98,7 +98,8 @@ public class RobotContainer {
     Trajectory exampleTrajectory = TrajectoryGenerator.generateTrajectory(
         // Start at the origin facing the +X direction
         TrajectoryConstants.startPose,
-        TrajectoryConstants.interiorWavePoints,
+        // straight, wave or mondrian
+        TrajectoryConstants.interiorMondrianPoints,
         TrajectoryConstants.endPose, 
         config);
 

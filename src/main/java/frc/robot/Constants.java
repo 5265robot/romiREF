@@ -68,8 +68,9 @@ public final class Constants {
         // WAVE in the middle
         public static final List<Translation2d> interiorWavePoints =
           List.of(
-            new Translation2d(Units.inchesToMeters(+16.0), Units.inchesToMeters(+16.0)),
-            new Translation2d(Units.inchesToMeters(+22.0), Units.inchesToMeters(+10.0))
+            new Translation2d(Units.inchesToMeters(+6.0), Units.inchesToMeters(+0.0)),
+            new Translation2d(Units.inchesToMeters(+6.0), Units.inchesToMeters(+6.0)),
+            new Translation2d(Units.inchesToMeters(+6.0), Units.inchesToMeters(+12.0))
           );
         // MONDRIAN MADNESS
         public static final List<Translation2d> interiorMondrianPoints =
@@ -104,18 +105,18 @@ public final class Constants {
           );
         public static final Pose2d startPose =
           // straight
-          // new Pose2d(Units.inchesToMeters(-6.0),Units.inchesToMeters(-6.0), new Rotation2d(0));
+          // new Pose2d(Units.inchesToMeters(-6.0),Units.inchesToMeters(-6.0), new Rotation2d(Units.degreesToRadians(0)));
           // wave
-          new Pose2d(Units.inchesToMeters(+10.0),Units.inchesToMeters(+10.0),new Rotation2d(-Math.PI / 2)); 
+          // new Pose2d(Units.inchesToMeters(+0.0),Units.inchesToMeters(+0.0),new Rotation2d(Units.degreesToRadians(0.0))); 
           // mondrian
-          // new Pose2d(Units.inchesToMeters(-13.5), Units.inchesToMeters(4.5), new Rotation2d(0));
+          new Pose2d(Units.inchesToMeters(-13.5), Units.inchesToMeters(4.5), new Rotation2d(Units.degreesToRadians(-90)));
         public static final Pose2d endPose = 
           // straight
-          // new Pose2d(Units.inchesToMeters(-6.0),Units.inchesToMeters(+6.0), new Rotation2d(0));
+          // new Pose2d(Units.inchesToMeters(-6.0),Units.inchesToMeters(+6.0), new Rotation2d(Units.degreesToRadians(0)));
           //wave
-          new Pose2d(Units.inchesToMeters(+23.0),Units.inchesToMeters(+10.0),new Rotation2d(-Math.PI / 2));
+          // new Pose2d(Units.inchesToMeters(+6.0),Units.inchesToMeters(+13.0),new Rotation2d(Units.degreesToRadians(90)));
           // mondrian 
-          // new Pose2d(Units.inchesToMeters(+13.5), Units.inchesToMeters(-4.5), new Rotation2d(0));
+          new Pose2d(Units.inchesToMeters(+13.5), Units.inchesToMeters(-4.5), new Rotation2d(Units.degreesToRadians(-90)));
     }
 
 }
