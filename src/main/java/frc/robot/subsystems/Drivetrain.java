@@ -69,6 +69,10 @@ public class Drivetrain extends SubsystemBase {
     m_diffDrive.arcadeDrive(xaxisSpeed, zaxisRotate);
   }
 
+  public void tankDrive(double Left, double Right) {
+    m_diffDrive.tankDrive(Left, Right);
+  }
+
   // added to match chief delphi example
   /**
    * Controls the left and right sides of the drive directly with voltages.
@@ -88,6 +92,7 @@ public class Drivetrain extends SubsystemBase {
   }
 
   public int getLeftEncoderCount() {
+    
     return m_leftEncoder.get();
   }
 

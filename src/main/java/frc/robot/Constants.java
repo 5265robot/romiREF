@@ -45,11 +45,11 @@ public final class Constants {
       }
     
     public static final class AutoConstants {
-        public static final double kMaxSpeedMetersPerSecond = 0.5; // was 0.8
-        public static final double kMaxAccelerationMetersPerSecondSquared = 0.45; // was 0.8
+        public static final double kMaxSpeedMetersPerSecond = 0.4; // was 0.8
+        public static final double kMaxAccelerationMetersPerSecondSquared = 0.30; // was 0.8
     
         // Reasonable baseline values for a RAMSETE follower in units of meters and seconds
-        public static final double kRamseteB = 2;
+        public static final double kRamseteB = 2.0;
         public static final double kRamseteZeta = 0.7;
       }
 
@@ -77,30 +77,31 @@ public final class Constants {
           List.of(
             // inital pose is Units.inchesToMeters(-13.5),Units.inchesToMeters(4.5)
             // 9 inches down
-            new Translation2d(Units.inchesToMeters(-12.5),Units.inchesToMeters(-4.5)),
+            // new Translation2d(Units.inchesToMeters(-12.5),Units.inchesToMeters(-4.5)),
             // begin the curve
-            new Translation2d(Units.inchesToMeters(-11.0),Units.inchesToMeters(-11.0)),
+            new Translation2d(Units.inchesToMeters(-11.0),Units.inchesToMeters(-10.8)),
             // enter the yellow
-            new Translation2d(Units.inchesToMeters(-4.5),Units.inchesToMeters(-13.0)),
+            // new Translation2d(Units.inchesToMeters(-4.5),Units.inchesToMeters(-13.0)),
             // 9 inches right to be 90 degrees from initial pose
-            new Translation2d(Units.inchesToMeters(+4.5),Units.inchesToMeters(-13.0)),
+            new Translation2d(Units.inchesToMeters(+5.0),Units.inchesToMeters(-10.8)),
             // align for center traverse
-            new Translation2d(Units.inchesToMeters(+4.5),Units.inchesToMeters(-9.0)),
+            // new Translation2d(Units.inchesToMeters(+4.5),Units.inchesToMeters(-10.0)),
+
             // center
-            new Translation2d(Units.inchesToMeters(+0.0),Units.inchesToMeters(+0.0)),
+            // new Translation2d(Units.inchesToMeters(+0.0),Units.inchesToMeters(+0.0)),
             
             // everything is now a reflection of the original route
             // in reverse order (which means the sign changes, not the value)
             // exit the center
-            new Translation2d(Units.inchesToMeters(-4.5),Units.inchesToMeters(+9.0)),
+            // new Translation2d(Units.inchesToMeters(-2.0),Units.inchesToMeters(+9.0)),
             // traverse the blue to be a reflection of the 90 degree position
-            new Translation2d(Units.inchesToMeters(-4.5),Units.inchesToMeters(+13.0)),
+            new Translation2d(Units.inchesToMeters(-5.0),Units.inchesToMeters(+10.8)),
             // 9 inches right
-            new Translation2d(Units.inchesToMeters(+4.5),Units.inchesToMeters(+13.0)),
+            // new Translation2d(Units.inchesToMeters(+4.5),Units.inchesToMeters(+13.0)),
             // begin the curve
-            new Translation2d(Units.inchesToMeters(+11.0),Units.inchesToMeters(11.0)),
+            new Translation2d(Units.inchesToMeters(+11.0),Units.inchesToMeters(+10.8))
             // align for entering the red
-            new Translation2d(Units.inchesToMeters(+12.5),Units.inchesToMeters(+4.5))
+            // new Translation2d(Units.inchesToMeters(+14.5),Units.inchesToMeters(+4.5))
             // 9 inches down
             // ending pose is Units.inchesToMeters(+13.5),Units.inchesToMeters(-4.5)
           );
@@ -117,7 +118,7 @@ public final class Constants {
           //wave
           // new Pose2d(Units.inchesToMeters(+6.0),Units.inchesToMeters(+13.0),new Rotation2d(Units.degreesToRadians(90)));
           // mondrian 
-          new Pose2d(Units.inchesToMeters(+13.5), Units.inchesToMeters(-2.0), new Rotation2d(Units.degreesToRadians(-90)));
+          new Pose2d(Units.inchesToMeters(+13.5), Units.inchesToMeters(-3.0), new Rotation2d(Units.degreesToRadians(-90)));
     }
 
 }
