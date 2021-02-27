@@ -43,6 +43,8 @@ public class Drivetrain extends SubsystemBase {
   // to match chief delphi example trajectory
   // Set up odometry class
   private final DifferentialDriveOdometry m_odometry;
+  public Pose2d m_pose;
+
   // Set up field diagram
   private final Field2d m_field2D = new Field2d();
 
@@ -54,8 +56,12 @@ public class Drivetrain extends SubsystemBase {
     //
     resetEncoders();
 
+    // added optional pose to place robot not in center of odometry
+    // m_odometry = new
+    // DifferentialDriveOdometry(m_gyro.getRotation2d(),TrajectoryConstants.startPose);
+    // original without optional start pose
     m_odometry = new DifferentialDriveOdometry(m_gyro.getRotation2d());
-    SmartDashboard.putData("field",m_field2D);
+    SmartDashboard.putData("field", m_field2D);
   }
 
   public void arcadeDrive(double xaxisSpeed, double zaxisRotate) {
@@ -66,12 +72,13 @@ public class Drivetrain extends SubsystemBase {
   // added to match chief delphi example
   /**
    * Controls the left and right sides of the drive directly with voltages.
-   * @param leftVolts the commanded left output
+   * 
+   * @param leftVolts  the commanded left output
    * @param rightVolts the commanded right output
    */
   public void tankDriveVolts(double leftVolts, double rightVolts) {
-    m_leftMotor.setVoltage(-leftVolts);
-    m_rightMotor.setVoltage(rightVolts); // We invert this to maintain +ve = forward
+    m_leftMotor.setVoltage(leftVolts);
+    m_rightMotor.setVoltage(-rightVolts); // We invert this to maintain +ve = forward
     m_diffDrive.feed();
   }
 
@@ -91,9 +98,11 @@ public class Drivetrain extends SubsystemBase {
   public double getLeftDistanceInch() {
     return m_leftEncoder.getDistance();
   }
+
   public double getRightDistanceInch() {
     return m_rightEncoder.getDistance();
   }
+
   public double getAverageDistanceInch() {
     return (getLeftDistanceInch() + getRightDistanceInch()) / 2.0;
   }
@@ -102,13 +111,14 @@ public class Drivetrain extends SubsystemBase {
   public double getLeftDistanceMeter() {
     return m_leftEncoder.getDistance();
   }
+
   public double getRightDistanceMeter() {
     return m_rightEncoder.getDistance();
   }
+
   public double getAverageDistanceMeter() {
     return (getLeftDistanceMeter() + getRightDistanceMeter()) / 2.0;
   }
-
 
   /**
    * The acceleration in the X-axis.
@@ -173,9 +183,11 @@ public class Drivetrain extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     // update odometry
-    m_odometry.update(m_gyro.getRotation2d(), m_leftEncoder.getDistance(), m_rightEncoder.getDistance());
+    m_pose = m_odometry.update(m_gyro.getRotation2d(), m_leftEncoder.getDistance(), m_rightEncoder.getDistance());
     // update field object
-    m_field2D.setRobotPose(getPose());
+    // m_field2D.setRobotPose(getPose());
+    // use the pose we just made
+    m_field2D.setRobotPose(m_pose);
   }
 
   // next 7 methods added to match chief delphi example
