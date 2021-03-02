@@ -75,6 +75,7 @@ public final class Constants {
         // MONDRIAN MADNESS
         public static final List<Translation2d> interiorMondrianPoints =
           List.of(
+            //
             // inital pose is Units.inchesToMeters(-13.5),Units.inchesToMeters(4.5)
             // 9 inches down
             // new Translation2d(Units.inchesToMeters(-12.5),Units.inchesToMeters(-4.5)),
