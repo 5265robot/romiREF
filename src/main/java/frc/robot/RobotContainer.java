@@ -16,6 +16,7 @@ import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.AutonomousDistance;
 import frc.robot.commands.AutonomousTime;
 import frc.robot.commands.TankDrive;
+import frc.robot.sensors.RomiAnalog;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.OnBoardIO;
 import frc.robot.subsystems.OnBoardIO.ChannelMode;
@@ -41,6 +42,7 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final Drivetrain m_drivetrain = new Drivetrain();
   private final OnBoardIO m_onboardIO = new OnBoardIO(ChannelMode.INPUT, ChannelMode.INPUT);
+  private final RomiAnalog m_RomiAnalog = new RomiAnalog();
 
   // Assumes a gamepad plugged into channnel 0
   private final XboxController m_controller = new XboxController(0);
@@ -155,6 +157,7 @@ public class RobotContainer {
     m_chooser.addOption("Auto Routine Time", new AutonomousTime(m_drivetrain));
     m_chooser.addOption("Ramsete trajectory", generateRamseteCommand());
     SmartDashboard.putData(m_chooser);
+    SmartDashboard.putNumber("left sensor", m_RomiAnalog.getLeftLightSensor());
   }
 
   /**

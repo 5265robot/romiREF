@@ -25,6 +25,12 @@ import edu.wpi.first.wpilibj.util.Units;
 public final class Constants {
 
     // possibly use with not driving straight?
+    public static final class LightInput {
+      public static final int leftInput = 0;
+      public static final int rightInput = 1;
+    }    
+    
+    // possibly use with not driving straight?
     public static final class Weirdness {
       public static final double leftTweak = 1.0;
       public static final double rightTweak = 1.0;
