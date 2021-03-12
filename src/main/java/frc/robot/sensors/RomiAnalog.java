@@ -27,6 +27,12 @@ public class RomiAnalog extends SubsystemBase {
     return m_romiInputRight.get();
   }
 
+  public double getDifference(){
+    double l = getLeftLightSensor();
+    double r = getRigthLightSensor();
+    return (l - r); 
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

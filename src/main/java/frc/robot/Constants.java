@@ -28,6 +28,8 @@ public final class Constants {
     public static final class LightInput {
       public static final int leftInput = 0;
       public static final int rightInput = 1;
+      public static final double baseSpeed = 1;
+      public static final double sensitivity = 0.1;
     }    
     
     // possibly use with not driving straight?

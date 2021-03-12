@@ -4,6 +4,8 @@
 
 package frc.robot.subsystems;
 
+import javax.lang.model.util.ElementScanner6;
+
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Spark;
@@ -13,8 +15,11 @@ import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Constants;
 import frc.robot.Constants.TrajectoryConstants;
+import frc.robot.sensors.RomiAnalog;
 import frc.robot.sensors.RomiGyro;
+import jdk.vm.ci.meta.Constant;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Drivetrain extends SubsystemBase {
@@ -245,4 +250,21 @@ public class Drivetrain extends SubsystemBase {
   public double getTurnRate() {
     return -m_gyro.getRate();
   }
+
+  // line following code
+  // difference is left - right sensors
+  // apply different voltages to wheels depending on sensor
+  public void driveByLine (RomiAnalog m_sensor){
+    double diff = m_sensor.getDifference();
+    double lVolts = Constants.LightInput.baseSpeed;
+    double rVolts = Constants.LightInput.baseSpeed;
+    if ( (diff - Constants.LightInput.sensitivity) > 0){
+      rVolts = rVolts * (1-diff);
+    } else
+    if ( (diff + Constants.LightInput.sensitivity) < 0) {
+      lVolts = lVolts * (1 + diff);
+    }
+    tankDrive(lVolts, rVolts);
+  }
+
 }
