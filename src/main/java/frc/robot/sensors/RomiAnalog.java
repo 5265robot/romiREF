@@ -16,11 +16,14 @@ public class RomiAnalog extends SubsystemBase {
   public RomiAnalog() {
     m_romiInputLeft = new AnalogPotentiometer(Constants.LightInput.leftInput);
     m_romiInputRight = new AnalogPotentiometer(Constants.LightInput.rightInput);
-    
   }
 
   public double getLeftLightSensor() {
       return m_romiInputLeft.get();
+  }
+
+  public void printSensor() {
+    System.out.println(getLeftLightSensor());
   }
 
   public double getRigthLightSensor(){

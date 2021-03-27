@@ -31,6 +31,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.button.Button;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -151,6 +152,10 @@ public class RobotContainer {
     onboardButtonA
         .whenActive(new PrintCommand("Button A Pressed"))
         .whenInactive(new PrintCommand("Button A Released"));
+
+    // Testing the light sensors
+    new JoystickButton(m_controller, XboxController.Button.kB.value)
+      .whenPressed(new InstantCommand(m_RomiAnalog::printSensor,m_RomiAnalog));
 
     // Setup SmartDashboard options
     m_chooser.setDefaultOption("Auto Routine Distance", new AutonomousDistance(m_drivetrain));
