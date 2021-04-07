@@ -4,8 +4,6 @@
 
 package frc.robot.subsystems;
 
-import javax.lang.model.util.ElementScanner6;
-
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Spark;
@@ -19,7 +17,6 @@ import frc.robot.Constants;
 import frc.robot.Constants.TrajectoryConstants;
 import frc.robot.sensors.RomiAnalog;
 import frc.robot.sensors.RomiGyro;
-import jdk.vm.ci.meta.Constant;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Drivetrain extends SubsystemBase {
