@@ -7,18 +7,17 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.PIDCommand;
-import frc.robot.subsystems.Drivetrain;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class DrivePID extends PIDCommand {
-  private final RomiAnalog m_lightsensor;
-  private final Drivetrain m_drivetrain;
+  private final AnalogPotentiometer m_sensor;
+  private final 
 
 
   /** Creates a new DrivePID. */
-  public DrivePID(RomiAnalog lightsensor, Drivetrain drivetrain) {
+  public DrivePID() {
     super(
         // The controller that the command will use
         new PIDController(0, 0, 0),
@@ -30,10 +29,7 @@ public class DrivePID extends PIDCommand {
         output -> {
           // Use the output here
         });
-    m_drivetrain = drivetrain;
-    m_lightsensor = lightsensor;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(m_drivetrain, m_lightsensor);
     // Configure additional PID options by calling `getController` here.
   }
 
